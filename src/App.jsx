@@ -1,11 +1,13 @@
+import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
-import {SafeAreaView, StatusBar} from 'react-native';
+
+import {MainNavigation} from './routes/mainNavigation';
 
 function App() {
   return (
-    <SafeAreaView>
-      <StatusBar />
-    </SafeAreaView>
+    <NavigationContainer>
+      <MainNavigation />
+    </NavigationContainer>
   );
 }
 
