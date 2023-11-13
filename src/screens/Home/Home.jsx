@@ -5,11 +5,14 @@ import {Header} from '../../components/Header/Header';
 import {Search} from '../../components/Search/Search';
 import {DonationItem} from '../../components/DonationItem/DonationItem';
 import {styles} from './styles';
+import {useSelector} from 'react-redux';
 
 export function Home() {
+  const user = useSelector(state => state.user);
+
   return (
     <SafeAreaView style={[globalStyles.backgroundWhite, globalStyles.flex]}>
-      <Header title="Azzahri A." type={1} />
+      <Header title={`${user.firstName} ${user.lastName}`} type={1} />
       <Search onSearch={value => console.log(value)} />
       <View style={styles.container}>
         <DonationItem
