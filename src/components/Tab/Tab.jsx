@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import {styles} from './styles';
 import {horizontalScale} from '../../utils/scaling';
 
-export function Tab({title, isInactive = false, onPress = () => {}}) {
+export function Tab({title, tabId, isInactive = false, onPress = () => {}}) {
   const [width, setWidth] = useState(0);
   const textRef = useRef(null);
   const paddingHorizontal = 33;
@@ -16,9 +16,8 @@ export function Tab({title, isInactive = false, onPress = () => {}}) {
   return (
     <TouchableOpacity
       style={[styles.tab, isInactive && styles.inactiveTab, tabWidth]}
-      disabled={isInactive}
       activeOpacity={0.7}
-      onPress={onPress}>
+      onPress={() => onPress(tabId)}>
       <Text
         onTextLayout={event => {
           setWidth(event.nativeEvent.lines[0].width);
@@ -32,6 +31,7 @@ export function Tab({title, isInactive = false, onPress = () => {}}) {
 }
 
 Tab.propTypes = {
+  tabId: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   isInactive: PropTypes.bool,
   onPress: PropTypes.func,
