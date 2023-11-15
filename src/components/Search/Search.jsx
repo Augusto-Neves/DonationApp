@@ -7,7 +7,7 @@ import {scaleFontSize} from '../../utils/scaling';
 
 import {styles} from './styles';
 
-export function Search({onSearch = () => {}}) {
+export function Search({onSearch = () => {}, placeholder = 'Search'}) {
   const [search, setSearch] = useState('');
   const textInputRef = useRef(null);
 
@@ -32,7 +32,7 @@ export function Search({onSearch = () => {}}) {
       <TextInput
         ref={textInputRef}
         style={styles.searchInput}
-        placeholder="Search"
+        placeholder={placeholder}
         placeholderTextColor="#686C7A"
         value={search}
         onChangeText={handleSearch}
@@ -43,4 +43,5 @@ export function Search({onSearch = () => {}}) {
 
 Search.propTypes = {
   onSearch: PropTypes.func,
+  placeholder: PropTypes.string,
 };
