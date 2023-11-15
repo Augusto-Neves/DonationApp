@@ -6,7 +6,8 @@ export const styles = StyleSheet.create({
   image: {
     width: horizontalScale(155),
     height: verticalScale(170),
-    resizeMode: 'contain',
+    resizeMode: 'cover',
+    borderRadius: horizontalScale(20),
   },
   badge: {
     position: 'absolute',
