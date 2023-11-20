@@ -4,7 +4,7 @@ import {horizontalScale, verticalScale} from '../../utils/scaling';
 export const styles = StyleSheet.create({
   container: {},
   image: {
-    width: horizontalScale(155),
+    width: horizontalScale(140),
     height: verticalScale(170),
     resizeMode: 'cover',
     borderRadius: horizontalScale(20),
