@@ -3,7 +3,7 @@ import {View, Text} from 'react-native';
 import PropTypes from 'prop-types';
 import {styles} from './styles';
 
-export function Header({title = '', type = 1, color}) {
+export function Header({title = '', type = 1, color, numberOfLines}) {
   function stylesToApply() {
     switch (type) {
       case 1:
@@ -19,7 +19,11 @@ export function Header({title = '', type = 1, color}) {
 
   return (
     <View style={styles.container}>
-      <Text style={[stylesToApply(), color && styles.blueTitle]}>{title}</Text>
+      <Text
+        style={[stylesToApply(), color && styles.blueTitle]}
+        numberOfLines={numberOfLines && numberOfLines}>
+        {title}
+      </Text>
     </View>
   );
 }
@@ -28,4 +32,5 @@ Header.propTypes = {
   title: PropTypes.string,
   type: PropTypes.number,
   color: PropTypes.string,
+  numberOfLines: PropTypes.number,
 };

@@ -26,7 +26,7 @@ export function DonationItem({
         <Image source={{uri: uri}} style={styles.image} />
       </View>
       <View style={styles.donationInformation}>
-        <Header title={donationTitle} type={3} />
+        <Header title={donationTitle} type={3} numberOfLines={1} />
         <View style={styles.price}>
           <Header title={`$${price.toFixed(2)}`} type={3} color="#156CF7" />
         </View>
