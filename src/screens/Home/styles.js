@@ -19,8 +19,15 @@ export const styles = StyleSheet.create({
     marginTop: verticalScale(6),
   },
   donationItemContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
     marginTop: verticalScale(20),
     marginHorizontal: horizontalScale(24),
+  },
+  donationSingleItem: {
+    maxWidth: '49%',
+    marginBottom: verticalScale(23),
   },
   header: {
     marginTop: verticalScale(20),
