@@ -16,8 +16,10 @@ import {DonationItem} from '../../components/DonationItem/DonationItem';
 import {styles} from './styles';
 import {useDispatch, useSelector} from 'react-redux';
 import {updatedSelectedCategoryId} from '../../store/reducers/Categories';
+import {updateSelectedDonationId} from '../../store/reducers/Donations';
+import {Routes} from '../../routes/routesNames';
 
-export function Home() {
+export function Home({navigation}) {
   const [categoryPage, setCategoryPage] = useState(1);
   const [categoryList, setCategoryList] = useState([]);
   const [isLoadingCategories, setIsLoadingCategories] = useState(false);
@@ -30,6 +32,10 @@ export function Home() {
   const donations = useSelector(state => state.donations);
   const dispatch = useDispatch();
 
+  const categoryName = categories.categories.filter(
+    category => category.categoryId === categories.selectedCategoryId,
+  )[0].name;
+
   function pagination(items, pageNumber, pageSize) {
     const startIndex = (pageNumber - 1) * pageSize;
     const endIndex = startIndex + pageSize;
@@ -39,6 +45,11 @@ export function Home() {
     }
 
     return items.slice(startIndex, endIndex);
+  }
+
+  function handleDonationItemPress(id) {
+    dispatch(updateSelectedDonationId(id));
+    navigation.navigate(Routes.SingleDonation, {categoryName});
   }
 
   useEffect(() => {
@@ -138,20 +149,18 @@ export function Home() {
         {donationItem.length > 0 && (
           <View style={styles.donationItemContainer}>
             {donationItem.map(donation => (
-              <DonationItem
-                badgeTitle={
-                  categories.categories.filter(
-                    category =>
-                      category.categoryId === categories.selectedCategoryId,
-                  )[0].name
-                }
-                donationTitle={donation.name}
-                donationItemId={donation.donationItemId}
-                price={parseFloat(donation.price)}
-                uri={donation.image}
+              <View
                 key={donation.donationItemId}
-                onPress={selectedDonationId => console.log(selectedDonationId)}
-              />
+                style={styles.donationSingleItem}>
+                <DonationItem
+                  badgeTitle={categoryName}
+                  donationTitle={donation.name}
+                  donationItemId={donation.donationItemId}
+                  price={parseFloat(donation.price)}
+                  uri={donation.image}
+                  onPress={handleDonationItemPress}
+                />
+              </View>
             ))}
           </View>
         )}
