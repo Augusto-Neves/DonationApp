@@ -6,9 +6,11 @@ import {SingleDonation} from '../screens/SingleDonation/SingleDonation';
 
 const Stack = createStackNavigator();
 
-export function MainNavigation() {
+export function AuthenticatedNavigation() {
   return (
-    <Stack.Navigator screenOptions={{headerShown: false}}>
+    <Stack.Navigator
+      initialRouteName={Routes.Home}
+      screenOptions={{headerShown: false}}>
       <Stack.Screen name={Routes.Home} component={Home} />
       <Stack.Screen name={Routes.SingleDonation} component={SingleDonation} />
     </Stack.Navigator>

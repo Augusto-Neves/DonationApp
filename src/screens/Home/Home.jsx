@@ -18,6 +18,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {updatedSelectedCategoryId} from '../../store/reducers/Categories';
 import {updateSelectedDonationId} from '../../store/reducers/Donations';
 import {Routes} from '../../routes/routesNames';
+import {resetToInitialState} from '../../store/reducers/User';
+import {logoutUser} from '../../api/user';
 
 export function Home({navigation}) {
   const [categoryPage, setCategoryPage] = useState(1);
@@ -52,6 +54,11 @@ export function Home({navigation}) {
     navigation.navigate(Routes.SingleDonation, {categoryName});
   }
 
+  async function handleLogoutUser() {
+    await logoutUser();
+    dispatch(resetToInitialState());
+  }
+
   useEffect(() => {
     const items = donations.items;
     const filteredItems = items.filter(item =>
@@ -78,18 +85,20 @@ export function Home({navigation}) {
           <View>
             <Text style={styles.headerText}>Hello, </Text>
             <View style={styles.userName}>
-              <Header
-                title={`${user.firstName} ${user.lastName[0]}. 👋`}
-                type={1}
-              />
+              <Header title={`${user.displayName} 👋`} type={1} />
             </View>
           </View>
 
-          <Image
-            source={{uri: user.profileImage}}
-            style={styles.profileImage}
-            resizeMode="contain"
-          />
+          <View>
+            <Image
+              source={{uri: user.profileImage}}
+              style={styles.profileImage}
+              resizeMode="contain"
+            />
+            <TouchableOpacity activeOpacity={0.7} onPress={handleLogoutUser}>
+              <Header title="Logout" type={3} color="#156cf7" />
+            </TouchableOpacity>
+          </View>
         </View>
 
         <View style={styles.searchContainer}>
