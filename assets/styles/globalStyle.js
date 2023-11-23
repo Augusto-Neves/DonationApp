@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {verticalScale} from '../../src/utils/scaling';
 
 export const globalStyles = StyleSheet.create({
   backgroundWhite: {
@@ -12,5 +13,8 @@ export const globalStyles = StyleSheet.create({
   },
   headerText: {
     color: '#022150',
+  },
+  marginBottom24: {
+    marginBottom: verticalScale(24),
   },
 });
