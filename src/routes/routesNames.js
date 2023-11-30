@@ -3,4 +3,5 @@ export const Routes = {
   Home: 'Home',
   SingleDonation: 'SingleDonation',
   Registration: 'Registration',
+  Payment: 'Payment',
 };
