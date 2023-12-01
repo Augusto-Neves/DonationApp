@@ -1,14 +1,19 @@
 import React, {useRef, useEffect} from 'react';
-import {AppState} from 'react-native';
+import {AppState, StatusBar} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {MainNavigation} from './routes/index';
 import {Provider} from 'react-redux';
 import {persister, store} from './store/store';
 import {PersistGate} from 'redux-persist/integration/react';
 import {checkToken} from './api/user';
+import BootSplash from 'react-native-bootsplash';
 
 function App() {
   const appState = useRef(AppState.currentState);
+
+  function hideBootSplash() {
+    BootSplash.hide();
+  }
 
   useEffect(() => {
     AppState.addEventListener('change', nextAppState => {
@@ -25,7 +30,8 @@ function App() {
   return (
     <Provider store={store}>
       <PersistGate persistor={persister} loading={null}>
-        <NavigationContainer>
+        <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
+        <NavigationContainer onReady={hideBootSplash}>
           <MainNavigation />
         </NavigationContainer>
       </PersistGate>
